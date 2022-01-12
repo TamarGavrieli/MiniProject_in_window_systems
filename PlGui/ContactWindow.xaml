@@ -1,0 +1,18 @@
+﻿<Window x:Class="PlGui.ContactWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PlGui"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        Title="ContactWindow" Height="400" Width="600">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="r3.jpeg"/>
+        </Grid.Background>
+        <TextBox HorizontalAlignment="Left" Height="217" Margin="93,83,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="408" Background="#99FFFFFF"/>
+        <Button Content="Send" HorizontalAlignment="Left" Margin="224,312,0,0" VerticalAlignment="Top" Width="163" Click="Button_Click" Height="36"/>
+        <Label Content="we'll be glad to hear from you..." HorizontalAlignment="Left" Margin="93,39,0,0" VerticalAlignment="Top" Width="244" Foreground="White" FontWeight="Bold"/>
+    </Grid>
+</Window>

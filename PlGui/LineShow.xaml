@@ -1,0 +1,147 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PlGui"
+     WindowStartupLocation="CenterScreen"  
+        xmlns:BO="clr-namespace:BO;assembly=BL" x:Class="PlGui.LineShow"
+        mc:Ignorable="d"
+        Title="LineShow" Height="450" Width="800" Loaded="Window_Loaded">
+    
+    <Window.Resources>
+        <CollectionViewSource x:Key="lineViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:Line}, CreateList=True}"/>
+    </Window.Resources>
+    
+    
+    <Window.Background>
+        <ImageBrush ImageSource="r3.jpeg"/>
+    </Window.Background>
+    
+    
+    
+    <Grid DataContext="{StaticResource lineViewSource}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="557*"/>
+            <ColumnDefinition Width="235*"/>
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="grid3" HorizontalAlignment="Left" Margin="9,158,0,0" VerticalAlignment="Top" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="54"/>
+                <ColumnDefinition Width="34"/>
+                <ColumnDefinition Width="35"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+        </Grid>
+        <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="56,49,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="Line Number:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"  FontSize="18" FontWeight="Bold" Foreground="White"/>
+            <TextBlock x:Name="lineNumberTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="1" Grid.Row="0" Text="{Binding LineNumber}" VerticalAlignment="Center" FontWeight="Bold" FontSize="18" Foreground="White"/>
+            <Label Content="Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+            <TextBlock x:Name="idTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="1" Text="{Binding Id}" VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+            <Label Content="Area:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+            <TextBlock x:Name="areaTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="2" Text="{Binding Area}" VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+            <Label Content="To:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+            <TextBlock x:Name="lastStationTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="3" Text="{Binding LastStation.Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+            <Label Content="Fare:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center" Foreground="White" FontWeight="Bold"/>
+            <TextBlock x:Name="fareTextBlock" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="4" Text="{Binding Fare}" VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+            <Label Content="Travel Time In This Line:" Grid.Column="0" HorizontalAlignment="Left" Margin="5" Grid.Row="5" VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+            <TextBox x:Name="travelTimeInThisLineTextBox" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="5" Text="{Binding TravelTimeInThisLine, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" FontWeight="Bold" Background="Transparent" Foreground="White" TextAlignment="Center"/>
+        </Grid>
+        
+        
+        <ListView x:Name="times"   Grid.Column="1" HorizontalAlignment="Left" Height="204" Margin="59,49,0,0" VerticalAlignment="Top" Width="128">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Times to travel:" DisplayMemberBinding="{Binding StartAt}" Width="100"/>
+                    
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
+        <ListView  x:Name="stations"  HorizontalAlignment="Left" Height="124" Margin="56,268,0,0" VerticalAlignment="Top" Width="691" Grid.ColumnSpan="2">
+            <ListView.View>
+
+                <!--<ListView.ItemTemplate>
+
+                    <DataTemplate x:Name="myDataTemplate">
+
+                        <Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition  Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+
+                            </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0"  Text="{Binding Path=StationCode}" Margin="15,0,0,0" Width="40" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="14" />
+                        <TextBlock Grid.Column="1"  Text="{Binding Path=LineStationIndex}" Margin="15,0,0,0" Width="40" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="13" />
+                        <TextBlock Grid.Column="2" Text="{Binding Path=StationName}" Margin="15,0,0,0" Width="370" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="13" />
+                        <TextBlock Grid.Column="2" Text="{Binding Path=DistanceTo}" Margin="15,0,0,0" Width="370" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="13" />
+
+                        <TextBlock Grid.Column="2" Text="{Binding Path=TimeTo}" Margin="15,0,0,0" Width="370" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="13" />
+                       
+                            <Button x:Name="Delete_Button" Content="delete" Grid.Column="8" Height="30" Width ="55"  Click="delete_click_button" BorderBrush="{x:Null}" ClickMode="Release"  ></Button>
+                    
+                        </Grid>
+
+                    </DataTemplate>
+
+                </ListView.ItemTemplate>-->
+
+
+
+                <GridView>
+                    
+                    <GridViewColumn Header="Station code:" DisplayMemberBinding="{Binding StationCode}" Width="90"/>
+                    <GridViewColumn Header="index in this line:" DisplayMemberBinding="{Binding LineStationIndex}" Width="100"/>
+                    <GridViewColumn Header="name:" DisplayMemberBinding="{Binding StationName}" Width="200"/>
+                    <GridViewColumn Header="distance to next station:" DisplayMemberBinding="{Binding DistanceTo}" Width="138"/>
+                    <GridViewColumn Header="time to next station:" DisplayMemberBinding="{Binding TimeTo}" Width="120"/>
+                    <GridViewColumn Header="Delete" Width="50">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Delete" Click="delete_click_button" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+
+</Window>
+
+ 
+
+
+
+
+
+
+
